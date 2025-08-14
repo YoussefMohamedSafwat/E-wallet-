@@ -1,6 +1,9 @@
+import 'package:e_wallet/cubit/api_cubit.dart';
+import 'package:e_wallet/cubit/navigaton_cubit.dart';
 import 'package:e_wallet/screens/landing.dart';
 import 'package:e_wallet/screens/navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,13 +15,25 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => NavigatonCubit(),
+          child: const Navigation(),
+        ),
+        BlocProvider(
+          create: (context) => ApiCubit(),
+          child: const LandingScreen(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        ),
+        home: const Navigation(),
       ),
-      home: const Navigation(),
     );
   }
 }

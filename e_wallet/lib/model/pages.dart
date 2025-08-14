@@ -7,6 +7,6 @@ import 'package:flutter/material.dart';
 List<Widget> pages = const [
   LandingScreen(),
   StatScreen(),
-  Profile(),
+  ProfileScreen(),
   NotificationScreen(),
 ];
